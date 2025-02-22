@@ -2,6 +2,7 @@ import data
 import build_data
 import unittest
 
+from hw_3 import population_total, filter_by_state, population_by_education
 
 # These two values are defined to support testing below. The
 # data within these structures should not be modified. Doing
@@ -176,16 +177,40 @@ reduced_data = [
     ]
 
 class TestCases(unittest.TestCase):
-    pass
 
-    # Part 1
-    # test population_total
+
+    # Part 1:
+    def test_population_total_1(self):
+        data_set = full_data
+        expected = 318857056
+        result = population_total(data_set)
+        self.assertEqual(expected, result)
+
+    def test_population_total_2(self):
+        ...
 
     # Part 2
-    # test filter_by_state
+    def test_filter_by_state(self):
+        data_set = reduced_data
+        expected = 2
+        result = len(filter_by_state(data_set, 'CA'))
+        self.assertEqual(expected, result)
+
+    def test_filter_by_state_2(self):
+        ...
+
 
     # Part 3
-    # test population_by_education
+    def test_population_by_education_1(self):
+        data_set = reduced_data
+        expected = 0
+        result = population_by_education(reduced_data, "Lower than High School")
+        self.assertEqual(expected, result)
+
+    def test_population_by_education_2(self):
+        data_set = reduced_data
+
+
     # test population_by_ethnicity
     # test population_below_poverty_level
 
