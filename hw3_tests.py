@@ -5,7 +5,7 @@ import build_data
 import unittest
 
 from hw_3 import population_total, filter_by_state, population_by_education, population_by_ethnicity, \
-    population_below_poverty_level
+    population_below_poverty_level, percent_by_education
 
 # These two values are defined to support testing below. The
 # data within these structures should not be modified. Doing
@@ -210,6 +210,8 @@ class TestCases(unittest.TestCase):
 
 
     # Part 3
+
+    # test population_by_education
     def test_population_by_education_1(self):
         data_set = reduced_data
         expected = 0
@@ -222,7 +224,7 @@ class TestCases(unittest.TestCase):
         result = population_by_education(data_set, "Bachelor's Degree or Higher")
         self.assertAlmostEqual(expected, result)
 
-
+    #test population_by_ethnicity
     def test_population_by_ethnicity_1(self):
         data_set = [reduced_data[0], reduced_data[1]]
         expected = 1495.665 + 4133.699
@@ -235,7 +237,7 @@ class TestCases(unittest.TestCase):
         result = population_by_ethnicity(data_set, "Martian")
         self.assertEqual(expected, result)
 
-
+    #test population_below_poverty_level
     def test_population_below_poverty_level_1(self):
         data_set = [reduced_data[0], reduced_data[1]]
         expected = 6702.795 + 12462.794
@@ -249,7 +251,13 @@ class TestCases(unittest.TestCase):
         self.assertAlmostEqual(expected, result)
 
     # Part 4
-    # test percent_by_education
+    #test percent_by_education
+    def test_percent_by_education_1(self):
+        data_set = [reduced_data[0], reduced_data[1]]
+        expected = (11577.555 + 8822.671) / (55395 + 61697)
+        result = percent_by_education(data_set, "Bachelor's Degree or Higher")
+        self.assertEqual(expected, result)
+
     # test percent_by_ethnicity
     # test percent_below_poverty_level
 
