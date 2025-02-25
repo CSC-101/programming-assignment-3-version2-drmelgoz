@@ -1,6 +1,6 @@
 import data
 import build_data
-import county_demographics
+
 
 # Part 1:
 # population_total(): returns the sum of the 2014 population attributes for all inputted
@@ -107,6 +107,41 @@ def percent_below_poverty_level(counties:list[data.CountyDemographics]) -> float
     sub_total = population_below_poverty_level(counties)
     return sub_total / total
 
+# education_greater_than() and education_less_than():
+#
+# input:
+# output:
+
+def education_greater_than(counties:list[data.CountyDemographics], ed:str, thresh:float) -> list[data.CountyDemographics]:
+    return [county for county in counties if county.education[ed] > thresh]
+
+
+def education_less_than(counties:list[data.CountyDemographics], ed:str, thresh:float) -> list[data.CountyDemographics]:
+    return [county for county in counties if county.education[ed] < thresh]
+
+# ethnicity_greater_than() and ethnicity_less_than():
+#
+# input:
+# output:
+
+def ethnicity_greater_than(counties:list[data.CountyDemographics], eth:str, thresh:float) -> list[data.CountyDemographics]:
+    return [county for county in counties if county.ethnicities[eth] > thresh]
+
+
+def ethnicity_less_than(counties:list[data.CountyDemographics], eth:str, thresh:float) -> list[data.CountyDemographics]:
+    return [county for county in counties if county.ethnicities[eth] < thresh]
+
+# below_poverty_level_greater_than() and below_poverty_level_less_than()
+#
+# input:
+# output:
+
+def below_poverty_level_greater_than(counties:list[data.CountyDemographics], thresh:float) -> list[data.CountyDemographics]:
+    return [county for county in counties if county.income["Persons Below Poverty Level"] > thresh]
+
+
+def below_poverty_level_less_than(counties:list[data.CountyDemographics], thresh:float) -> list[data.CountyDemographics]:
+    return [county for county in counties if county.income["Persons Below Poverty Level"] < thresh]
 
 
 
