@@ -107,10 +107,11 @@ def percent_below_poverty_level(counties:list[data.CountyDemographics]) -> float
     sub_total = population_below_poverty_level(counties)
     return sub_total / total
 
-# education_greater_than() and education_less_than():
+# education_greater_than() and education_less_than(): returns a filtered list of inputted County objects that have
+# an education demographic percentage that is greater than/less than the given threshold.
 #
-# input:
-# output:
+# input: list[data.CountyDemographics], str, float
+# output: list[data.CountyDemographics]
 
 def education_greater_than(counties:list[data.CountyDemographics], ed:str, thresh:float) -> list[data.CountyDemographics]:
     return [county for county in counties if county.education[ed] > thresh]
@@ -119,10 +120,11 @@ def education_greater_than(counties:list[data.CountyDemographics], ed:str, thres
 def education_less_than(counties:list[data.CountyDemographics], ed:str, thresh:float) -> list[data.CountyDemographics]:
     return [county for county in counties if county.education[ed] < thresh]
 
-# ethnicity_greater_than() and ethnicity_less_than():
+# ethnicity_greater_than() and ethnicity_less_than(): returns a filtered list of inputted County objects that have
+# an ethnicity demographic percentage that is greater than/ less than the given threshold.
 #
-# input:
-# output:
+# input: list[data.CountyDemographics], str, float
+# output: list[data.CountyDemographics
 
 def ethnicity_greater_than(counties:list[data.CountyDemographics], eth:str, thresh:float) -> list[data.CountyDemographics]:
     return [county for county in counties if county.ethnicities[eth] > thresh]
@@ -131,10 +133,12 @@ def ethnicity_greater_than(counties:list[data.CountyDemographics], eth:str, thre
 def ethnicity_less_than(counties:list[data.CountyDemographics], eth:str, thresh:float) -> list[data.CountyDemographics]:
     return [county for county in counties if county.ethnicities[eth] < thresh]
 
-# below_poverty_level_greater_than() and below_poverty_level_less_than()
+# below_poverty_level_greater_than() and below_poverty_level_less_than(): returns a filtered list of
+# inputted County objects that have a below_poverty_level demographic percentage that is greater than or less than the
+# given threshold.
 #
-# input:
-# output:
+# input: list[data.CountyDemographics], float
+# output: list[data.CountyDemographics]
 
 def below_poverty_level_greater_than(counties:list[data.CountyDemographics], thresh:float) -> list[data.CountyDemographics]:
     return [county for county in counties if county.income["Persons Below Poverty Level"] > thresh]
