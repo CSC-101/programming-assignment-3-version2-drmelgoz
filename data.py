@@ -39,7 +39,7 @@ class CountyDemographics:
             )
 
     def __eq__(self, other):
-        return other is self or (type(self) == type(other)
+        return self is other or (type(self) == type(other)
                                  and self.age == other.age
                                  and self.county == other.county
                                  and self.education == other.education
