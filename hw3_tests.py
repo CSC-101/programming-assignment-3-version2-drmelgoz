@@ -1,7 +1,13 @@
+from unittest import expectedFailure
+
 import data
 import build_data
 import unittest
 
+from hw_3 import population_total, filter_by_state, population_by_education, population_by_ethnicity, \
+    population_below_poverty_level, percent_by_education, percent_by_ethnicity, percent_below_poverty_level, \
+    education_greater_than, education_less_than, ethnicity_greater_than, ethnicity_less_than, \
+    below_poverty_level_greater_than, below_poverty_level_less_than
 
 # These two values are defined to support testing below. The
 # data within these structures should not be modified. Doing
@@ -176,31 +182,201 @@ reduced_data = [
     ]
 
 class TestCases(unittest.TestCase):
-    pass
 
-    # Part 1
-    # test population_total
+
+    # Part 1:
+    def test_population_total_1(self):
+        data_set = full_data
+        expected = 318857056
+        result = population_total(data_set)
+        self.assertEqual(expected, result)
+
+    def test_population_total_2(self):
+        data_set = reduced_data
+        expected = 55395 + 61697 + 279083 + 207590 + 2622 + 42225 + 7201
+        result = population_total(data_set)
+        self.assertEqual(expected, result)
 
     # Part 2
-    # test filter_by_state
+    def test_filter_by_state(self):
+        data_set = reduced_data
+        expected = 2
+        result = len(filter_by_state(data_set, 'CA'))
+        self.assertEqual(expected, result)
+
+    def test_filter_by_state_2(self):
+        data_set = full_data
+        expected = 58
+        result = len(filter_by_state(data_set, "CA"))
+        self.assertEqual(expected, result)
+
 
     # Part 3
+
     # test population_by_education
-    # test population_by_ethnicity
-    # test population_below_poverty_level
+    def test_population_by_education_1(self):
+        data_set = reduced_data
+        expected = 0
+        result = population_by_education(data_set, "Lower than High School")
+        self.assertEqual(expected, result)
+
+    def test_population_by_education_2(self):
+        data_set = [reduced_data[0], reduced_data[1]]
+        expected = 11577.555 + 8822.671
+        result = population_by_education(data_set, "Bachelor's Degree or Higher")
+        self.assertAlmostEqual(expected, result)
+
+    #test population_by_ethnicity
+    def test_population_by_ethnicity_1(self):
+        data_set = [reduced_data[0], reduced_data[1]]
+        expected = 1495.665 + 4133.699
+        result = population_by_ethnicity(data_set, "Hispanic or Latino")
+        self.assertAlmostEqual(expected, result)
+
+    def test_population_by_ethnicity_2(self):
+        data_set = reduced_data
+        expected = 0
+        result = population_by_ethnicity(data_set, "Martian")
+        self.assertEqual(expected, result)
+
+    #test population_below_poverty_level
+    def test_population_below_poverty_level_1(self):
+        data_set = [reduced_data[0], reduced_data[1]]
+        expected = 6702.795 + 12462.794
+        result = population_below_poverty_level(data_set)
+        self.assertAlmostEqual(expected, result)
+
+    def test_population_below_poverty_level_2(self):
+        data_set = [reduced_data[2], reduced_data[3]]
+        expected = 39908.869 + 39649.69
+        result = population_below_poverty_level(data_set)
+        self.assertAlmostEqual(expected, result)
 
     # Part 4
-    # test percent_by_education
-    # test percent_by_ethnicity
-    # test percent_below_poverty_level
+    #test percent_by_education
+    def test_percent_by_education_1(self):
+        data_set = [reduced_data[0], reduced_data[1]]
+        expected = (11577.555 + 8822.671) / (55395 + 61697)
+        result = percent_by_education(data_set, "Bachelor's Degree or Higher")
+        self.assertEqual(expected, result)
 
-    # Part 5
+    def test_percent_by_education_2(self):
+        data_set = [reduced_data[2], reduced_data[3]]
+        expected = (250058.368 + 174998.37) / (279083 + 207590)
+        result = percent_by_education(data_set, "High School or Higher")
+        self.assertEqual(expected, result)
+
+
+    # test percent_by_ethnicity
+    def test_percent_by_ethnicity_1(self):
+        data_set = [reduced_data[0], reduced_data[1]]
+        expected = 0
+        result = percent_by_ethnicity(data_set, "Martian")
+        self.assertEqual(expected, result)
+
+    def test_percent_by_ethnicity_2(self):
+        data_set = [reduced_data[2], reduced_data[3]]
+        expected = (10605.154 + 28647.42) / (279083 + 207590)
+        result = percent_by_ethnicity(data_set, "Asian Alone")
+        self.assertEqual(expected, result)
+
+
+    # test percent_below_poverty_level
+    def test_percent_below_poverty_level_1(self):
+        data_set = [reduced_data[0], reduced_data[1]]
+        expected = (6702.795 + 12462.794) / (55395 + 61697)
+        result = percent_below_poverty_level(data_set)
+        self.assertEqual(expected, result)
+
+    def test_percent_below_poverty_level_2(self):
+        data_set = [reduced_data[2], reduced_data[3]]
+        expected = (39908.869 + 39649.69) / (279083 + 207590)
+        result = percent_below_poverty_level(data_set)
+        self.assertEqual(expected, result)
+
+    # Part 5: Note that I had to create an __eq__() dunder
+    # function in data.py for the County Demographics object
+    # to create these tests
+
     # test education_greater_than
+    def test_education_greater_than_1(self):
+        data_set = reduced_data
+        expected = [data_set[0], data_set[2], data_set[3]]
+        result = education_greater_than(data_set, "Bachelor's Degree or Higher", 20)
+        self.assertEqual(expected, result)
+
+    def test_education_greater_than_2(self):
+        data_set = reduced_data
+        expected = [data_set[0], data_set[2], data_set[4], data_set[6]]
+        result = education_greater_than(data_set, "High School or Higher", 85)
+        self.assertEqual(expected, result)
+
     # test education_less_than
+    def test_education_less_than_1(self):
+        data_set = reduced_data
+        expected = [data_set[1], data_set[4], data_set[5], data_set[6]]
+        result = education_less_than(data_set, "Bachelor's Degree or Higher", 20)
+        self.assertEqual(expected, result)
+
+    def test_education_less_than_2(self):
+        data_set = reduced_data
+        expected = [data_set[1], data_set[3], data_set[5]]
+        result = education_less_than(data_set, "High School or Higher", 85)
+        self.assertEqual(expected, result)
+
+
     # test ethnicity_greater_than
+    def test_ethnicity_greater_than_1(self):
+        data_set = reduced_data
+        expected = [data_set[2], data_set[3], data_set[5]]
+        result = ethnicity_greater_than(data_set, "Hispanic or Latino", 8)
+        self.assertEqual(expected, result)
+
+    def test_ethnicity_greater_than_2(self):
+        data_set = reduced_data
+        expected = data_set
+        result = ethnicity_greater_than(data_set, "Asian Alone", 0)
+        self.assertEqual(expected, result)
+
+
     # test ethnicity_less_than
+    def test_ethnicity_less_than_1(self):
+        data_set = reduced_data
+        expected = [data_set[0], data_set[1], data_set[4], data_set[6]]
+        result = ethnicity_less_than(data_set, "Hispanic or Latino", 8)
+        self.assertEqual(expected, result)
+
+    def test_ethnicity_less_than_2(self):
+        data_set = reduced_data
+        expected = []
+        result = ethnicity_less_than(data_set, "Asian Alone", 0)
+        self.assertEqual(expected, result)
+
     # test below_poverty_level_greater_than
+    def test_below_poverty_level_greater_than_1(self):
+        data_set = reduced_data
+        expected = [data_set[0], data_set[1], data_set[2], data_set[3], data_set[4], data_set[5]]
+        result = below_poverty_level_greater_than(data_set, 12)
+        self.assertEqual(expected, result)
+
+    def test_below_poverty_level_greater_than_2(self):
+        data_set = reduced_data
+        expected = [data_set[1], data_set[3], data_set[5]]
+        result = below_poverty_level_greater_than(data_set, 18)
+        self.assertEqual(expected, result)
+
     # test below_poverty_level_less_than
+    def test_below_poverty_level_less_than_1(self):
+        data_set = reduced_data
+        expected = [data_set[6]]
+        result = below_poverty_level_less_than(data_set, 12)
+        self.assertEqual(expected, result)
+
+    def test_below_poverty_level_less_than_2(self):
+        data_set = reduced_data
+        expected = [data_set[0], data_set[2], data_set[4], data_set[6]]
+        result = below_poverty_level_less_than(data_set, 18)
+        self.assertEqual(expected, result)
 
 
 
