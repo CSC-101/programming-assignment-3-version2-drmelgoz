@@ -14,6 +14,7 @@ def population_total(counties:list[data.CountyDemographics]) -> int:
         total += county.population['2014 Population']
     return total
 
+
 #Part 2:
 # filer_by_state(): returns a list of county objects that is filtered to only include
 # counties which have the inputted state string as an attribute
@@ -29,6 +30,7 @@ def filter_by_state(counties:list[data.CountyDemographics], state:str) -> list[d
     except KeyError:
         return []
     return new_list
+
 
 #Part 3:
 
@@ -75,6 +77,8 @@ def population_below_poverty_level(counties:list[data.CountyDemographics]) -> fl
     return total
 
 
+# Part 4
+
 # percent_by_education(): returns the percentage of the 2014 population within an inputted education demographic
 # across all county objects from the inputted list.
 # input: list[data.CountyDemographics], str
@@ -107,8 +111,11 @@ def percent_below_poverty_level(counties:list[data.CountyDemographics]) -> float
     sub_total = population_below_poverty_level(counties)
     return sub_total / total
 
+
+# Part 5
+
 # education_greater_than() and education_less_than(): returns a filtered list of inputted County objects that have
-# an education demographic percentage that is greater than/less than the given threshold.
+# an education demographic percentage that is greater than or less than the given threshold.
 #
 # input: list[data.CountyDemographics], str, float
 # output: list[data.CountyDemographics]
@@ -121,7 +128,7 @@ def education_less_than(counties:list[data.CountyDemographics], ed:str, thresh:f
     return [county for county in counties if county.education[ed] < thresh]
 
 # ethnicity_greater_than() and ethnicity_less_than(): returns a filtered list of inputted County objects that have
-# an ethnicity demographic percentage that is greater than/ less than the given threshold.
+# an ethnicity demographic percentage that is greater than or less than the given threshold.
 #
 # input: list[data.CountyDemographics], str, float
 # output: list[data.CountyDemographics
